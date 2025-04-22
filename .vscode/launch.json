@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "request": "launch",
+            "name": "Launch Percolation",
+            "mainClass": "Percolation",
+            "args": "50"
+        }
+    ]
+}
