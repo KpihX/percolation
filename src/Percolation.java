@@ -73,7 +73,7 @@ public class Percolation {
             grid[i] = false;
         }
 
-        UnionFind.init(length);
+        UnionFind.init(length+2);
 	}
 	
 	public static void print() {
@@ -180,9 +180,14 @@ public class Percolation {
         return false;
     }
 
+    public static boolean isLogPercolation() {
+        return UnionFind.find(length) == UnionFind.find(length+1);
+    }
+
     public static boolean isPercolation(int n) {
         // return isNaivePercolation(n);
-        return isFastPercolation(n);
+        // return isFastPercolation(n);
+        return isLogPercolation();
     }
 
     public static double percolation() {
@@ -208,6 +213,25 @@ public class Percolation {
     }
 
     public static void propagateUnion(int x) {
+        if (x < size) { // n is a top cell in the matrix
+            UnionFind.union(x, length);
+            for (int i = 0; i < x; i++) {
+                UnionFind.union(x, i);
+            }
+            for (int i = x+1; i < size; i++) {
+                UnionFind.union(x, i);
+            } 
+        }
+
+        if (x >= length - size) { // n is a bottow cell in the matrix
+            UnionFind.union(x, length+1);
+            for (int i = length - size; i < x; i++) {
+                UnionFind.union(x, i);
+            }
+            for (int i = x+1; i < length; i++) {
+                UnionFind.union(x, i);
+            } 
+        }
         if (x % size != 0 && grid[x-1] == true) { 
             UnionFind.union(x-1, x);
             // UnionFind.union(x, x-1);
