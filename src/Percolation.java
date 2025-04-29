@@ -1,5 +1,5 @@
 public class Percolation {
-    static final int size = 100;
+    static final int size = 10;
     static final int length = size * size;
     static boolean[] grid = new boolean[length];
 	
@@ -26,6 +26,32 @@ public class Percolation {
         // Percolation.init();
 		// Percolation.print();
         // System.out.println("\n");
+
+        // // print tests
+        // // Test 1
+        // Percolation.init();
+        // grid[2 * size + 4] = true;
+        // Percolation.print();
+
+        // System.err.println("");
+
+        // // Test 2
+        // Percolation.init();
+        // for (int i = 0; i < 2; i++) {
+        //     for (int j = 0; j < size; j++) {
+        //         grid[i * size + j] = true;
+        //     }
+        // } 
+        // for (int j = 0; j < size; j++) {
+        //     grid[3 * size + j] = true;
+        // }
+        // for (int i = 5; i < size; i++) {
+        //     for (int j = 0; j < size; j++) {
+        //         grid[size + i] = true;
+        //         grid[i * size + j] = true;
+        //     }
+        // } 
+        // Percolation.print();
 
         // // Test of randomShadow
         // int rand_index;
@@ -73,7 +99,9 @@ public class Percolation {
             grid[i] = false;
         }
 
-        UnionFind.init(length+2);
+        UnionFind.init(length+2); 
+        // equiv[length] will represent the top element
+        // equiv[length+1] will represent the bottom element
 	}
 	
 	public static void print() {
@@ -128,7 +156,6 @@ public class Percolation {
             return true;
         }
 
-        // System.out.println(n + " & " + (n % size != n - 1));
         if (n % size != 0 && seen[n-1] == false && grid[n-1] == true) { // There is an unseen cell, at the left side of cell n in the matrix
             seenUpdated = seen.clone();
             seenUpdated[n] = true;
@@ -213,24 +240,12 @@ public class Percolation {
     }
 
     public static void propagateUnion(int x) {
-        if (x < size) { // n is a top cell in the matrix
+        if (x < size) { // we are dealing with top cells
             UnionFind.union(x, length);
-            for (int i = 0; i < x; i++) {
-                UnionFind.union(x, i);
-            }
-            for (int i = x+1; i < size; i++) {
-                UnionFind.union(x, i);
-            } 
         }
 
-        if (x >= length - size) { // n is a bottow cell in the matrix
+        if (x >= length - size) { // we are dealing with bottom cells
             UnionFind.union(x, length+1);
-            for (int i = length - size; i < x; i++) {
-                UnionFind.union(x, i);
-            }
-            for (int i = x+1; i < length; i++) {
-                UnionFind.union(x, i);
-            } 
         }
         if (x % size != 0 && grid[x-1] == true) { 
             UnionFind.union(x-1, x);

@@ -22,7 +22,6 @@ public class UnionFind {
         while (x != equiv[x]) {
             x = equiv[x];
         }
-        // System.out.println("* " + x + " & " + equiv[x]);
         return x;
     }
 
