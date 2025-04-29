@@ -16,3 +16,8 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 ## Dependency Management
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+
+### Analysis & Optimisation
+
+- 
+- When we use compression in logFind(), we no more evaluate the real height of trees in logUnion but another quantity called 'rank' which has the same advantages as the real height.
